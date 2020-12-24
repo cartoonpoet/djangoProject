@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+#wrap{
+    width: 100%;
+    min-width: 1020px;
+}
+section{
+    overflow: hidden;
+    display: block;
+    width: 510px;
+    margin: 80px auto;
+
+}
+.discrution{
+    margin-left: 73px;
+    font-size: 1.1rem;
+}
+.logo{
+    display: block;
+    width: 250px;
+    margin-left: 140px;
+}
+
+form>input{
+    width: 350px;
+    border: 1px solid #ccc;
+    margin-top: 2rem;
+    border-radius: 5px;
+    padding: 20px 10px;
+    font-size: 1.2rem;
+    margin-left: 71px;
+}
+.login_bt{
+    background: #0eacff;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 60px;
+    width: 373px;
+    cursor: pointer;
+}
+#auto_login{
+    font-size: 1.1rem;
+    margin: 0 auto;
+    margin-left: 70px;
+    margin-top: 3rem;
+    width: 100%;
+
+}
+ul{
+    width: 375px;
+}
+ul>li:first-child{
+    float: left;
+}
+.sign_up{
+    float: right;
+    text-decoration: underline;
+    color: #0088ff
+}
+.id:focus{
+    border: 1px solid #003bff;
+}
+.pw:focus{
+    border: 1px solid #003bff;
+}

@@ -1,0 +1,133 @@
+@charset "utf-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+#wrap{
+    width: 100%;
+    min-width: 1020px;
+    font-family: 'NanumSquare', sans-serif;
+    display: inline-block;
+}
+
+.board{
+    width: 600px;
+    margin: 0 auto;
+    padding-top: 20px;
+    height: 600px;
+}
+.board>span:first-child{
+    float: left;
+}
+.board>span:nth-child(2){
+    float: right;
+}
+.board>span:nth-child(3){
+    float: right;
+    margin-right: 20px;
+}
+.search{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.search>span{
+    float: left;
+    font-size: 1.3rem;
+}
+.search>form{
+    float: right;
+}
+.search_type{
+    font-size: 1.2rem;
+    border-color: #ccc;
+    appearance:none;
+    padding: 5px 10px;
+    text-align-last: center;
+}
+.searching{
+    font-size: 1.0rem;
+    cursor: pointer;
+}
+form>input{
+    font-size: 1.2rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.clasified{
+    margin-top: 100px;
+    width: 100%;
+}
+.board_num{
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.board_title{
+    padding: 10px 185px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.board_date{
+    padding: 10px 50px;
+    border: 1px solid #ccc;
+    float: left;
+}
+.post{
+    width: 100%;
+}
+.post>span:first-child{
+    width: 63px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+}
+.post>span:nth-child(2){
+    width: 372px;
+    float: left;
+    text-align: left;
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.post>span:nth-child(3){
+    width: 133px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+}
+.page_num{
+    text-align: center;
+    display: block;
+    margin-top: 500px;
+}
+.write{
+    padding: 5px 10px;
+    border: 1px solid blue;
+    float: right;
+    margin-right: 10px;
+    margin-top:-18px;
+    border-radius: 4px;
+}
+.pre{
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
+.next{
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
+.numbers{
+    padding: 5px;
+}
+.selected{
+    font-weight: bold;
+    color: #ff4131;
+    border: 1px solid #ccc;
+}

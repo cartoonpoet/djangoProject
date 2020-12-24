@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/static/css/commen.css">
+    <link rel="stylesheet" href="/static/css/signupform.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/checker.js"></script>
+</head>
+<body>
+    <div id="wrap">
+       <div id="notice">회원가입</div>
+        <form method="POST" action="" class="input" name="signForm">
+            {% csrf_token %}
+            <div><input type="text" placeholder="성" class="info last_name" maxlength="2" name="last_name"></div>
+            <div><input type="text" placeholder="이름" class="info first_name" name="first_name"></div>
+            <div><input type="text" placeholder="닉네임" class="info nikname" name="nickname"></div>
+            <div><input type="text" placeholder="아이디" class="info email" name="email"></div>
+            <div><input type="password" placeholder="비밀번호" class="info pw" name="pw"></div>
+            <div><input type="password" placeholder="비밀번호 확인" class="info pw re_pw" name="pw_check"></div>
+            <div class="select">
+                   <span><input type="radio" name="gender" value="man" class="gender" checked>남자</span>
+                    <span><input type="radio" name="gender" value="woman" class="gender">여자</span>
+            </div>
+            <div><input type="button" value="회원가입" class="submit"></div>
+            <a href="{% url 'index' %}" class="back_to_login">로그인</a>
+        </form>
+    </div>
+</body>
+</html>

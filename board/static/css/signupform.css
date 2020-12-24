@@ -1,0 +1,81 @@
+@charset "utf-8";
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+#wrap{
+    width: 100%;
+    min-width: 1020px;
+    font-family: 'NanumSquare', sans-serif;
+}
+#notice{
+    font-size: 30px;
+    margin: 0 auto;
+    width: 200px;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+.input{
+    width: 330px;
+    margin: 0 auto;
+}
+.input>div{
+    font-size: 15px;
+}
+.info{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 1.2rem;
+        padding: 20px 10px;
+}
+.last_name{
+    width: 60px;
+    float: left;
+}
+.first_name{
+    width: 200px;
+    margin-left: 15px;
+}
+.nikname{
+    margin-top: 15px;
+    width: 297px;
+}
+.email{
+    margin-top: 15px;
+    width: 297px;
+}
+.pw{
+    margin-top: 15px;
+    width: 297px;
+}
+.select{
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.select>span:first-child{
+    margin-right: 5px;
+}
+.gender{
+    margin-right: 5px;
+}
+.submit{
+    background: #0eacff;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 60px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+.back_to_login{
+    margin-top: 20px;
+    float: right;
+    text-decoration: underline;
+    color: #0088ff;
+    font-size: 1.2rem;
+}

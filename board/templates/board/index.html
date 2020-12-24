@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/static/css/commen.css">
+    <link rel="stylesheet" href="/static/css/loginform.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        checkValue = function(element){
+                var inputText1 = document.getElementById("e_mail");
+                var userNameValue1 = inputText1.value;
+                var inputText2 = document.getElementById("password");
+                var userNameValue2 = inputText2.value;
+
+                if(userNameValue1==""){
+                    alert("아이디를 입력해주세요.");
+                    return false;
+                }
+                else if(userNameValue2==""){
+                    alert("비밀번호를 입력해주세요.");
+                    return false;
+                }
+
+                var queryString = $("form[name=login]").serialize();
+                $.ajax({
+                    type : 'post',
+                    url : '',
+                    data : queryString,
+                    dataType : 'json',
+                    error : function (xhr, status, error){
+                        alert(error);
+                    } ,
+                    success : function (json){
+                        if(Number(json['message'])==1){
+                            location.href="boardlist/";
+                        }
+                        else{
+                            alert('아이디가 존재하지 않거나 틀렸습니다.');
+                        }
+                    }
+                });
+
+            }
+    </script>
+</head>
+<body>
+    <div id="wrap">
+       <section>
+            <form action="" name="login">
+                {% csrf_token %}
+                <input type="text" class="id" id="e_mail" placeholder="아이디" name="email">
+                <input type="password" class="pw" id="password"  placeholder="비밀번호" name="pw">
+                <div class="discrution">
+                   <br>
+                    아이디 또는 비밀번호를 입력해주세요.
+                </div>
+                <input type="button" value="로그인" class="login_bt" onclick="checkValue(this)">
+                <div id="auto_login">
+                    <ul>
+                        <li class="sign_up">
+                            <a href="{% url 'signup' %}">회원가입</a>
+                        </li>
+                        <li class="sign_up">
+                            <a href="">비밀번호 찾기</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+       </section>
+    </div>
+
+</body>
+</html>
