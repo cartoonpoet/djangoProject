@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="/static/css/commen.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/static/css/boardlist.css">
-    <script type="text/javascript" src="/static/js/boardlist.js?ver=1"></script>
+    <script type="text/javascript" src="/static/js/boardlist.js?ver=2"></script>
 
 </head>
 <body>
     <div id="wrap">
-        {% csrf_token %}
+
        <div class="board">
             <span>~님 환영합니다.</span>
-            <span><a href="" class="logout">로그아웃</a></span>
+            <span><a href="" class="logout" >로그아웃</a></span>
+            {% csrf_token %}
             <span><a href="">내 정보</a></span>
             <br>
             <div class="search">

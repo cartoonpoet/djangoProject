@@ -36,11 +36,12 @@ def index(request):
             data = {'email':datas[0]['email'], 'fullname':datas[0]['last_name']+datas[0]['first_name'], 'nickname':datas[0]['nickname']}
 
             # 토큰 발행
+            '''
             token = jwt.encode(data, SECRET_KEY, ALGORITHM)
-            token = token.decode('utf-8')
+            token = token.decode('utf-8')'''
 
             res = JsonResponse({'message': 1})
-            res.set_cookie('access_token', token)
+            '''res.set_cookie('access_token', token)'''
             login = AuthenticationForm(request, request.POST)
 
             # 로그인
@@ -52,13 +53,12 @@ def index(request):
             return HttpResponse(res)
 
 def logout(request):
-    print(11)
     if request.method == 'POST':
+        print('로그아웃')
         reset = ''
-        res = JsonResponse({'message:'
-                            ' 0'})
-        res.set_cookie('access_token', reset)
-        #auth_logout(request)
+        res = JsonResponse({'message':' 0'})
+        '''res.set_cookie('access_token', reset)'''
+        auth_logout(request)
         return HttpResponse(res)
 
 def signup(request):
