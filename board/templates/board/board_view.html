@@ -20,7 +20,9 @@
                 <div class="view_form">
                    <div class="title">
                        <h1>{{ post.board_title }}</h1>
-                       <a href="#">수정</a>
+                       {% if post.email == user.username %}
+                       <a href="modify">수정</a>
+                       {% endif %}
                     </div>
                    <ul class="post_info">
                        <li>작성자 : {{ post.email }}</li>
@@ -43,7 +45,9 @@
                         <button class="Previous"><a href="../{{ pre }}">이전글</a></button>
                         <button class="next"><a href="../{{ next }}">다음글</a></button>
                        <button class="list"><a href="../">목록</a></button>
+                        {% if post.email == user.username %}
                        <button class="delete"><a href="delete">삭제</a></button>
+                        {% endif %}
                     </div>
                     
                 </div>

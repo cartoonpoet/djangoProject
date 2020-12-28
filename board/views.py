@@ -80,41 +80,36 @@ def signup(request):
 def boardlist(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            board_data = BoardList.objects.all().order_by('-id') # 게시물 정보
-            board_cnt = BoardList.objects.all().aggregate(Count('id'))
-            data_num = board_cnt['id__count'] # 게시물 개수
-            board_cnt['id__count'] /= 10
-            board_cnt['id__count'] = math.ceil(board_cnt['id__count']) # 페이지 수
+            keyword = request.GET.get('keyword')
+            
+            # 키워드가 없는 경우 모든 게시글 조회
+            if keyword is None or keyword is '' or keyword == 'null':
+                board_data = BoardList.objects.all().order_by('-id') # 게시물 정보
+                board_cnt = BoardList.objects.all().aggregate(Count('id'))
+                data_num = board_cnt['id__count'] # 게시물 개수
+                board_cnt['id__count'] /= 10
+                board_cnt['id__count'] = math.ceil(board_cnt['id__count']) # 페이지 수
 
-            paginator = Paginator(board_data, 10)
-            page = request.GET.get('page')
-            if page is None:
-                page = 1
-            posts = paginator.get_page(page)
+                paginator = Paginator(board_data, 10)
+                page = request.GET.get('page')
+                if page is None:
+                    page = 1
+                posts = paginator.get_page(page)
 
-            # if request.GET.get('keyword') is not None: # 검색일 경우
-            #     type = request.GET.get('type')
-            #     keyword = request.GET.get('keyword')
-            #
-            #     if type == 'title':
-            #         board_data = BoardList.objects.filter(board_title=keyword).all()
-            #         board_cnt = BoardList.objects.filter(board_title=keyword).aggregate(Count('id'))
-            #     elif type == 'contents':
-            #         board_data = BoardList.objects.filter(board_contents=keyword).all()
-            #         board_cnt = BoardList.objects.filter(board_contents=keyword).aggregate(Count('id'))
-            #
-            #     board_cnt['id__count'] /= 10
-            #     board_cnt['id__count'] = math.ceil(board_cnt['id__count'])  # 페이지 수
-            #
-            #     paginator = Paginator(board_data, 10)
-            #     page = request.GET.get('page')
-            #     if page is None:
-            #         page = 1
-            #     posts = paginator.get_page(page)
-            #
-            #     return render(request, 'board/boardlist.html', {'ranges': range(1, board_cnt['id__count'] + 1), 'data_num': data_num, 'posts': posts, 'type': type, 'keyword': keyword})
+                return render(request, 'board/boardlist.html', {'ranges': range(1, board_cnt['id__count']+1), 'data_num': data_num, 'posts': posts})
+            # 키워드가 있는 경우 해당 키워드를 포함한 게시글만 조회
+            else:
+                data_num = BoardList.objects.filter(board_title__contains=keyword).count()
+                board_data = BoardList.objects.filter(board_title__contains=keyword).order_by('-id')
 
-            return render(request, 'board/boardlist.html', {'ranges': range(1, board_cnt['id__count']+1), 'data_num': data_num, 'posts': posts})
+                paginator = Paginator(board_data, 10)
+                page = request.GET.get('page')
+                if page is None:
+                    page = 1
+                posts = paginator.get_page(page)
+
+                return render(request, 'board/boardlist.html', {'ranges': range(1, math.ceil(data_num/10)+1), 'data_num': data_num, 'posts': posts, 'keyword': keyword})
+                
         else:
             return redirect('index')
 
@@ -198,3 +193,47 @@ def board_delete(request, page_num):
     data.delete()
 
     return redirect('boardlist')
+
+
+# 게시물 수정
+def board_modify(request, page_num):
+    if request.method == 'GET': # 게시물 수정 페이지 불러오기
+        if request.user.is_authenticated:
+            data = BoardList.objects.filter(id = page_num)
+            data = data[0]
+            print(data)
+            return render(request, 'board/board_modify.html', {'data': data})
+        else:
+            return redirect('index')
+    elif request.method == 'POST': # 게시물 수정 Action
+        if request.user.is_authenticated:
+            form_data = BoardList.objects.filter(id=page_num)
+            form_data = form_data[0]
+            form_data.board_title = request.POST['title']
+            form_data.board_contents = request.POST['content']
+            files = request.FILES.getlist('file')
+            form_data.board_contents = form_data.board_contents.replace('\r\n', '<br>')  # 문자 치환
+
+            if len(files) == 0: # 업로드 파일이 0개면
+                form_data.file1 = ''
+                form_data.file2 = ''
+                form_data.file3 = ''
+                form_data.file4 = ''
+                form_data.file5 = ''
+
+            for i in range(len(files)):
+                if i == 0:
+                    form_data.file1 = request.FILES.getlist('file')[i]
+                elif i == 1:
+                    form_data.file2 = request.FILES.getlist('file')[i]
+                elif i == 2:
+                    form_data.file3 = request.FILES.getlist('file')[i]
+                elif i == 3:
+                    form_data.file4 = request.FILES.getlist('file')[i]
+                elif i == 4:
+                    form_data.file5 = request.FILES.getlist('file')[i]
+            form_data.save()
+
+            return redirect('../')
+        else:
+            return redirect('index')

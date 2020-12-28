@@ -16,14 +16,13 @@
             <span>{{ user.first_name }}님 환영합니다.</span>
             <span><a href="../logout_action/" class="logout" >로그아웃</a></span>
            {% endif %}
-            <span><a href="">내 정보</a></span>
+            <span><a href="{% url 'boardlist' %}">전체 글 보기</a></span>
             <br>
             <div class="search">
                 <span>□ 총 {{ data_num }}건의 게시물</span>
                 <form action="" method="GET">
                     <select name="type" id="" class="search_type">
                         <option value="title">제목</option>
-                        <option value="contents">내용</option>
                     </select>
                     <input type="text" class="contents" name="keyword">
                     <input type="button" value="검색" class="searching">
@@ -43,14 +42,14 @@
             {% endfor %}
                 <div class="page_num">
                     {% if posts.has_previous %} <!--첫번째 페이지면-->
-                    <a href="?page={{ posts.previous_page_number }}" class="pre">&lt; 이전</a>
+                    <a href="?page={{ posts.previous_page_number }}{% if keyword is not None %}&keyword={{ keyword }}{% endif %}" class="pre">&lt; 이전</a>
                     {% endif %}
                     {% for i in ranges %} <!--페이지 번호-->
 {#                        <a href="?page={{ i }}" class="numbers selected">{{ i }}</a>#}
-                        <a href="?page={{ i }}" class="numbers {% if i == posts.number %}selected{% endif %}">{{ i }}</a>
+                        <a href="?page={{ i }}{% if keyword is not None %}&keyword={{ keyword }}{% endif %}" class="numbers {% if i == posts.number %}selected{% endif %}">{{ i }}</a>
                     {% endfor %}
                 {% if posts.has_next %}<!--마지막 페이지와 현재 페이지가 다르면-->
-                    <a href="?page={{ posts.next_page_number }}" class="next">다음 &gt;</a>
+                    <a href="?page={{ posts.next_page_number }}{% if keyword is not None %}&keyword={{ keyword }}{% endif %}" class="next">다음 &gt;</a>
                 {% endif %}
                 </div>
                 <a href="board_edit" class="write">작성</a>

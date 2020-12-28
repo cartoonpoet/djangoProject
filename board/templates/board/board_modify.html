@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>글 수정하기</title>
+    <link rel="stylesheet" href="/static/css/commen.css">
+   <link rel="stylesheet" href="/static/css/edit.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+     <script src="/static/js/jquery.MultiFile.js"></script>
+     <script src="/static/js/modify.js?ver=12"></script>
+</head>
+<body>
+    <div id="wrap"> <!-- 전체를 감싸는 부분 -->
+        <section id="sub-content">
+            <div id="sub-con-body" class="section">
+                <div class="edit_form">
+                  <h1>글쓰기</h1>
+                   <form action="" name="edit_form" method="post" class="edit" onsubmit="return checkForm();" enctype="multipart/form-data">
+                       {% csrf_token %}
+                       <div class="title">
+                           <label for="title">제목</label>
+                           <input type="text" name="title" placeholder="제목을 입력하세요" value="{{ data.board_title }}">
+                       </div>
+                       <div class="content">
+                           <label for="content">내용</label>
+                           <textarea name="content" id="contents" cols="30" rows="10" placeholder="내용을 입력하세요">{% autoescape off %}{{ data.board_contents }}{% endautoescape %}</textarea>
+                       </div>
+                       <div class="file">
+                           <label for="file">파일 첨부</label>
+                           <div class="file_add">
+                                <input class="upload-name upload1" value="파일선택" disabled="disabled">
+                               <input type="file" name="file" id="ex_filename1" class="upload-hidden1" multiple>
+                               <label for="ex_filename1" class="ex_filename">업로드</label>
+                           </div>
+                       </div>
+                       <div class="btn">
+                            <input type="submit" value="수정하기" class="post_edit">
+                           <input type="button" value="취소하기" class="cancel">
+                       </div>
+
+                   </form>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+</body>
+</html>
