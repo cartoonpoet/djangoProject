@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>게시물</title>
+    <link rel="stylesheet" href="/static/css/commen.css">
+    <link rel="stylesheet" href="/static/css/view.css">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+        $(document).ready(function() {
+        })
+    </script>
+</head>
+<body>
+    <div id="wrap"> <!-- 전체를 감싸는 부분 -->
+        <section id="sub-content">
+            <div id="sub-con-body" class="section">
+                <div class="view_form">
+                   <div class="title">
+                       <h1>{{ post.board_title }}</h1>
+                       <a href="#">수정</a>
+                    </div>
+                   <ul class="post_info">
+                       <li>작성자 : {{ post.email }}</li>
+                       <li>{{ post.board_date | date:'yy-m-d, H:i' }}</li>
+{#                       <li>조회수 100회</li>#}
+                   </ul>
+                    <div class="download">
+                        <h1><a href="/media/{{ post.file1 }}" download>{{ post.file1 }}</a></h1>
+                        <h1><a href="/media/{{ post.file2 }}" download>{{ post.file2 }}</a></h1>
+                        <h1><a href="/media/{{ post.file3 }}" download>{{ post.file3 }}</a></h1>
+                        <h1><a href="/media/{{ post.file4 }}" download>{{ post.file4 }}</a></h1>
+                        <h1><a href="/media/{{ post.file5 }}" download>{{ post.file5 }}</a></h1>
+                    </div>
+                    <div class="content">
+                        {% autoescape off %}
+                        {{ post.board_contents }}
+                        {% endautoescape %}
+                    </div>
+                    <div class="bt_group">
+                        <button class="Previous"><a href="../{{ pre }}">이전글</a></button>
+                        <button class="next"><a href="../{{ next }}">다음글</a></button>
+                       <button class="list"><a href="../">목록</a></button>
+                       <button class="delete"><a href="delete">삭제</a></button>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
-import json
 from  django.http import HttpResponse, JsonResponse
 from django.db.models import Count, Avg, Max, Min, Sum
 from django.contrib.auth import authenticate, login, logout
 from .models import User
 from django.contrib import messages
-from datetime import datetime
 from .models import BoardList
 import math
 from django.core.paginator import Paginator
-
+import os
+from django.conf import settings
 
 # models.py에서 만든 DB 테이블의 데이터를 처리하는 로직을 만들 수 있다.
 # Create your views here.
@@ -115,26 +114,46 @@ def boardlist(request):
             #
             #     return render(request, 'board/boardlist.html', {'ranges': range(1, board_cnt['id__count'] + 1), 'data_num': data_num, 'posts': posts, 'type': type, 'keyword': keyword})
 
-            return render(request, 'board/boardlist.html', {'ranges':range(1, board_cnt['id__count']+1), 'data_num':data_num, 'posts':posts})
+            return render(request, 'board/boardlist.html', {'ranges': range(1, board_cnt['id__count']+1), 'data_num': data_num, 'posts': posts})
         else:
             return redirect('index')
 
 
-# 게시물 작성하기
-def board_edit(request):
+# 게시물 보기
+def board_view(request, page_num):
     if request.method == 'GET':
+        post = BoardList.objects.filter(id=page_num).all()
+        max = BoardList.objects.all().aggregate(Max('id'))
+        
+        if page_num == 1: # 첫 글이면 이전 글 눌러도 동일한 글
+            pre = 1
+            next = page_num+1
+        elif page_num == max['id__max']:
+            pre = page_num-1
+            next = page_num
+        else:
+            pre = page_num-1
+            next = page_num+1
+
+        return render(request, 'board/board_view.html', {'post': post[0], 'pre': pre, 'next':next})
+
+
+# 게시물 작성 페이지 이동/작성/삭제
+def board_edit(request):
+    if request.method == 'GET': # 페이지 이동
         if request.user.is_authenticated:
             return render(request, 'board/board_edit.html')
         else:
             return redirect('index')
-    elif  request.method == 'POST':
+    elif request.method == 'POST': # 작성
         if request.user.is_authenticated:
             form_data = BoardList()
             form_data.email = request.user.username
             form_data.board_title = request.POST['title']
             form_data.board_contents = request.POST['content']
-
             files = request.FILES.getlist('file')
+
+            form_data.board_contents = form_data.board_contents.replace('\r\n', '<br>') # 문자 치환
 
             for i in range(len(files)):
                 if i == 0:
@@ -153,3 +172,29 @@ def board_edit(request):
             return redirect('boardlist')
         else:
             return redirect('index')
+
+
+# 게시물 삭제
+def board_delete(request, page_num):
+    data = BoardList.objects.filter(id = page_num)
+
+    # 첨부파일 확인 후 삭제
+    if os.path.isfile('./media/'+str(data[0].file1)):
+        os.remove('./media/'+str(data[0].file1))
+
+    if os.path.isfile('./media/'+str(data[0].file2)):
+        os.remove('./media/'+str(data[0].file2))
+
+    if os.path.isfile('./media/'+str(data[0].file3)):
+        os.remove('./media/'+str(data[0].file3))
+
+    if os.path.isfile('./media/'+str(data[0].file4)):
+        os.remove('./media/'+str(data[0].file4))
+
+    if os.path.isfile('./media/'+str(data[0].file5)):
+        os.remove('./media/'+str(data[0].file5))
+
+    # 데이터 삭제
+    data.delete()
+
+    return redirect('boardlist')

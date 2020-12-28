@@ -37,8 +37,8 @@
             {% for i in posts %}
             <div class="post">
                 <span>{{ i.id }}</span>
-                <span><a href="">{{ i.board_title }}</a></span>
-                <span>{{ i.board_date | date:'yy-m-d, H:i' }}</span>
+                <span><a href="{{ i.id }}">{{ i.board_title }}</a></span>
+                <span>{{ i.board_date | date:'yy-m-d' }}</span>
             </div>
             {% endfor %}
                 <div class="page_num">
