@@ -24,31 +24,34 @@
                 }
 
                 var queryString = $("form[name=login]").serialize();
-                $.ajax({
-                    type : 'post',
-                    url : '',
-                    data : queryString,
-                    dataType : 'json',
-                    error : function (xhr, status, error){
-                        alert(error);
-                    } ,
-                    success : function (json){
-                        if(Number(json['message'])==1){
-                            location.href="boardlist/";
-                        }
-                        else{
-                            alert('아이디가 존재하지 않거나 틀렸습니다.');
-                        }
-                    }
-                });
 
+                            $.ajax({
+               type : 'post',
+               url : '',
+               data : queryString,
+               dataType : 'json',
+               error : function (xhr, status, error){
+                   alert(error);
+               } ,
+                success : function (json){
+                   for(var i in json){
+                       if(Number(json[i])==0){
+                           alert('아이디를 확인하세요.');
+                           return false;
+                       }
+                       else if(Number(json[i])==1){
+                            location.href="boardlist/";
+                       }
+                   }
+                }
+            });
             }
     </script>
 </head>
 <body>
     <div id="wrap">
        <section>
-            <form action="" name="login">
+            <form action="" name="login" method="POST">
                 {% csrf_token %}
                 <input type="text" class="id" id="e_mail" placeholder="아이디" name="email">
                 <input type="password" class="pw" id="password"  placeholder="비밀번호" name="pw">

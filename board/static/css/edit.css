@@ -1,0 +1,152 @@
+@charset "utf-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+/*    font-family: 'NanumSquare', sans-serif;
+        font-family: "Nanum Gothic", sans-serif;
+*/
+
+.section{
+    width: 700px;
+    margin: 0 auto;
+}
+.edit_form{
+    overflow: hidden;
+    margin-top: 50px;
+}
+.edit_form h1{
+    font-size: 1.5rem;
+    font-family: "Nanum Gothic", sans-serif;
+    border-top: 2px solid #005bff;
+    width: 51px;
+    padding: 8px 0px;
+    margin-top: 40px;
+}
+.edit_form .edit{
+    overflow: hidden;
+    border-top: 2px solid #005bff;
+    margin-top: 10px;
+}
+.edit_form .edit .title{
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 1.2rem;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.edit_form .edit .title label{
+    background-color: #f6f6f6;
+    padding: 15px 0px;
+    float: left;
+    width: 130px;
+    text-align: left;
+    padding-left: 20px;
+    font-weight: bold;
+}
+.edit_form .edit .title input{
+    border: 1px solid #ccc;
+    padding: 7px 5px;
+    float: left;
+    width: 73%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 11px;
+}
+.edit_form .edit .content{
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.edit_form .edit .content label{
+    padding: 150px 0px;
+    float: left;
+    background-color: #f6f6f6;
+    width: 130px;
+    text-align: left;
+    padding-left: 20px;
+    font-weight: bold;
+}
+.edit_form .edit .content textarea{
+    border: 1px solid #ccc;
+    padding: 7px 5px;
+    float: left;
+    width: 73%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 11px;
+    height: 282px;
+    resize: none;
+}
+.edit_form .edit .file{
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+.edit_form .edit .file>label{
+    padding: 13px 0px;
+    float: left;
+    background-color: #f6f6f6;
+    width: 130px;
+    text-align: left;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.edit_form .edit .file input[type="file"]{
+    width: 1px; 
+    height: 1px; 
+    overflow: hidden; 
+    clip:rect(0,0,0,0); 
+    border: 0;
+}
+.edit_form .edit .file .ex_filename{
+    padding: .5em 1.1rem; 
+    color: #ffffff; 
+    font-size: 1rem; 
+    background-color: #007ef8; 
+    cursor: pointer; 
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.edit_form .file div{
+    overflow: hidden;
+}
+.edit_form .file .upload-name{
+    display: inline-block; 
+    padding: 0.5em 0.75em;  
+    font-size: inherit; 
+    font-family: inherit; 
+    line-height: normal; 
+    vertical-align: middle; 
+    background-color: #f5f5f5; 
+    border: 1px solid #ebebeb; 
+    border-bottom-color: #e2e2e2; 
+    border-radius: .25em; 
+    appearance: none; 
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 300px;
+}
+
+.edit_form .edit .btn{
+    width: 188px;
+    overflow: hidden;
+    margin: 0px auto;
+    margin-top: 40px;
+}
+
+
+.edit_form .edit .btn input{
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+    font-family: "Nanum Gothic", sans-serif;
+    border: none;
+}
+.edit_form .edit .btn input:first-child{
+    background-color: #0078ff;
+    font-size: 1.2rem;
+}
+.edit_form .edit .btn input:nth-child(2){
+    background-color: black;
+    margin-left: 15px;
+    font-size: 1.2rem;
+}
